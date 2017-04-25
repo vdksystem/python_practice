@@ -16,7 +16,9 @@ class MyContext:
             self.__exit__(e)
         return self.f
 
-    def __exit__(self, exc_type, exc_val, exc_tb):
+    def __exit__(self, *args):
+        if args[0]:
+            raise args[0]
         user = User("Dkuleshov")
         self.f.write("\nEdited by {}".format(user.name))
         self.f.close()
